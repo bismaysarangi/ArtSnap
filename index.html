@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snap Sign</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="heading"><h2>Snap Sign</h2></div>
+        <div class="top">
+            <div class="block">
+                <p>Text Color Picker</p>
+                <input class="form-control" type="color" id="colorPicker">
+            </div>
+            <div class="block">
+                <p>Background</p>
+                <input type="color" class="form-control" id="canvasColor"> 
+            </div>
+            <div class="block">
+                <p>Font Size</p>
+                <select id="fontSize">
+                    <option value="5">5px</option>
+                    <option value="10">10px</option>
+                    <option value="20">20px</option>
+                    <option value="30">30px</option>
+                    <option value="40">40px</option>
+                </select>
+            </div>
+        </div>
+        <canvas id="myCanvas" class="canvas" width="800" height="500">
+        </canvas>
+        <div class="bottom">
+            <button type="button" class="btn-btn-danger" id="clearButton">Clear</button>
+            <button type="button" class="btn-btn-danger" id="saveButton">Save and Download</button>
+            <button type="button" class="btn-btn-danger" id="retrieveButton">Retreive</button>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
