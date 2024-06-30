@@ -12,6 +12,14 @@ let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
 
+function getTouchPos(canvas, touchEvent) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: touchEvent.touches[0].clientX - rect.left,
+        y: touchEvent.touches[0].clientY - rect.top
+    };
+}
+
 colorPicker.addEventListener('change', (e) => {
     ctx.strokeStyle = e.target.value;
     ctx.fillStyle = e.target.value;
@@ -36,6 +44,32 @@ canvas.addEventListener('mousemove', (e) => {
 });
 
 canvas.addEventListener('mouseup', () => {
+    isDrawing = false;
+});
+
+canvas.addEventListener('touchstart', (e) => {
+    isDrawing = true;
+    const pos = getTouchPos(canvas, e);
+    lastX = pos.x;
+    lastY = pos.y;
+    e.preventDefault();
+});
+
+canvas.addEventListener('touchmove', (e) => {
+    if (isDrawing) {
+        const pos = getTouchPos(canvas, e);
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+
+        lastX = pos.x;
+        lastY = pos.y;
+    }
+    e.preventDefault();
+});
+
+canvas.addEventListener('touchend', () => {
     isDrawing = false;
 });
 
@@ -67,10 +101,9 @@ saveButton.addEventListener('click', () => {
 retrieveButton.addEventListener('click', () => {
     let savedCanvas = localStorage.getItem('canvasContents');
 
-    if(savedCanvas) {
+    if (savedCanvas) {
         let img = new Image();
         img.src = savedCanvas;
         ctx.drawImage(img, 0, 0);
     }
-})
-
+});
