@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 
 * {
     padding: 0;
@@ -8,7 +8,7 @@
 
 body {
     background-color: #98FF98;
-    font-family: "Quicksand", sans-serif;
+    font-family: "Karla", sans-serif;
 }
 
 .heading {
@@ -26,6 +26,8 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 90%; /* Adjusted to ensure the container is responsive */
+    max-width: 800px; /* Added a max-width to ensure it doesn't get too large on big screens */
 }
 
 .canvas {
@@ -43,28 +45,70 @@ body {
 }
 
 .block, input, select, button {
-    width: 80%;
+    width: 100%;
 }
 
 .top>.block {
     margin: 10px;
 }
 
+.block p {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.block input, select {
+    width: 100%;
+}
+
 button {
-    background-color: rgb(0, 55, 255);
-    color: white;
+    align-items: center;
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: .375em;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #363636;
     cursor: pointer;
-    border: none;
-    padding: 10px;
+    display: inline-flex;
+    font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    height: 2.5em;
+    justify-content: center;
+    line-height: 1.5;
+    padding: calc(.5em - 1px) 1em;
+    position: relative;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    white-space: nowrap;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 40%;
+}
+
+button:active {
+    border-color: #4a4a4a;
+    outline: 0;
+}
+
+button:focus {
+    border-color: #485fc7;
+    outline: 0;
 }
 
 button:hover {
-    background-color: #1c1a81;
+    border-color: #b5b5b5;
+    background-color: #3CB371;
+    transform: scale(1.05);
 }
 
-.bottom button {
-    width: 30%;
-    margin: 10px 5px;
+button:focus:not(:active) {
+    box-shadow: rgba(72, 95, 199, .25) 0 0 0 .125em;
 }
 
 .bottom {
@@ -73,19 +117,15 @@ button:hover {
 
 @media (max-width: 768px) {
     .top, .bottom {
+        display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
     }
 
-    .block, .bottom button {
-        width: 90%;
-        margin: 10px 0;
-    }
-
-    .container {
-        width: 95%;
-    }
-    .canvas {
-        aspect-ratio: 13/16;
+    button {
+        width: 100%;
+        margin-bottom: 15px;
     }
 }
+
