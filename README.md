@@ -1,1 +1,1 @@
-<h1>SnapSign</h1>
+<h1>Art Snap</h1>
