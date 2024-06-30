@@ -13,10 +13,11 @@ let lastX = 0;
 let lastY = 0;
 
 function getTouchPos(canvas, touchEvent) {
-    var rect = canvas.getBoundingClientRect();
+    const rect = canvas.getBoundingClientRect();
+    const touch = touchEvent.touches[0];
     return {
-        x: touchEvent.touches[0].clientX - rect.left,
-        y: touchEvent.touches[0].clientY - rect.top
+        x: touch.clientX - rect.left,
+        y: touch.clientY - rect.top
     };
 }
 
@@ -47,9 +48,13 @@ canvas.addEventListener('mouseup', () => {
     isDrawing = false;
 });
 
+canvas.addEventListener('mouseout', () => {
+    isDrawing = false;
+});
+
 canvas.addEventListener('touchstart', (e) => {
-    isDrawing = true;
     const pos = getTouchPos(canvas, e);
+    isDrawing = true;
     lastX = pos.x;
     lastY = pos.y;
     e.preventDefault();
@@ -74,6 +79,11 @@ canvas.addEventListener('touchend', () => {
     e.preventDefault();
 });
 
+canvas.addEventListener('touchcancel', () => {
+    isDrawing = false;
+    e.preventDefault();
+});
+
 canvasColor.addEventListener('change', (e) => {
     ctx.fillStyle = e.target.value;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -91,11 +101,8 @@ saveButton.addEventListener('click', () => {
     localStorage.setItem('canvasContents', canvas.toDataURL());
 
     let link = document.createElement('a');
-
     link.download = 'my-canvas.png';
-
     link.href = canvas.toDataURL();
-
     link.click();
 });
 
@@ -112,6 +119,26 @@ retrieveButton.addEventListener('click', () => {
 });
 
 // Prevent scrolling on touch devices when interacting with the canvas
-canvas.addEventListener('touchstart', (e) => e.preventDefault());
-canvas.addEventListener('touchmove', (e) => e.preventDefault());
-canvas.addEventListener('touchend', (e) => e.preventDefault());
+document.body.addEventListener('touchstart', (e) => {
+    if (e.target === canvas) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+document.body.addEventListener('touchmove', (e) => {
+    if (e.target === canvas) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+document.body.addEventListener('touchend', (e) => {
+    if (e.target === canvas) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+document.body.addEventListener('touchcancel', (e) => {
+    if (e.target === canvas) {
+        e.preventDefault();
+    }
+}, { passive: false });
