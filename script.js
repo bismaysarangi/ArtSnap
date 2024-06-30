@@ -71,11 +71,12 @@ canvas.addEventListener('touchmove', (e) => {
 
 canvas.addEventListener('touchend', () => {
     isDrawing = false;
+    e.preventDefault();
 });
 
 canvasColor.addEventListener('change', (e) => {
     ctx.fillStyle = e.target.value;
-    ctx.fillRect(0, 0, 800, 500);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 });
 
 fontPicker.addEventListener('change', (e) => {
@@ -104,6 +105,13 @@ retrieveButton.addEventListener('click', () => {
     if (savedCanvas) {
         let img = new Image();
         img.src = savedCanvas;
-        ctx.drawImage(img, 0, 0);
+        img.onload = () => {
+            ctx.drawImage(img, 0, 0);
+        };
     }
 });
+
+// Prevent scrolling on touch devices when interacting with the canvas
+canvas.addEventListener('touchstart', (e) => e.preventDefault());
+canvas.addEventListener('touchmove', (e) => e.preventDefault());
+canvas.addEventListener('touchend', (e) => e.preventDefault());
