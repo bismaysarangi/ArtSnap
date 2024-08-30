@@ -1,6 +1,5 @@
 <h1>Art Snap</h1>
-<p>
-  This web application allows users to draw on an HTML5 canvas using various brush colors and sizes. Users can save their drawings locally and retrieve them later.
+This web application allows users to draw on an HTML5 canvas using various brush colors and sizes. Users can save their drawings locally and retrieve them later.
 
 Features
 Drawing: Click or tap to draw on the canvas.
@@ -22,4 +21,4 @@ Drawing: Listens for mouse and touch events to track and draw on the canvas.
 Saving/Loading: Saves the canvas as a base64-encoded image in localStorage and retrieves it to display.
 License
 This project is licensed under the MIT License.
-</p>
+
